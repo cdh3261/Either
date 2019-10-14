@@ -1,0 +1,85 @@
+{%extends 'base.html'%}
+{%block body%}
+
+  <div class="d-flex align-items-center mb-2">
+    <a href="{% url 'questions:detail' question.id %}"><h5 id='title' class="card-title mr-5">{{question.title}}</h5></a>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <a href="{% url 'questions:update' question.id%}" class="card-link btn btn-outline-warning" name='options'>Edit</a>
+        <a href="{% url 'questions:delete' question.id %}" class="card-link btn btn-outline-warning" name='options'>Delete</a>
+    </div>
+  </div>
+    
+  <form action="{% url 'questions:answer_create' question.id %}" method='POST'>
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-6 ">
+      <div class="card" style="border: solid blue 3px; background-repeat: no-repeat; background-image: url({{question.img_a}}); background-size: cover; width:450px; height:300px;">
+        <div class="card-body">
+        </div>
+      </div>
+      <div class= 'd-flex justify-content-center my-2' style='width: 450px;'>
+        <input type="radio" name='pick' value="1" />
+      </div>
+      <div class= 'd-flex justify-content-center my-2' style='width: 450px;'>
+        <p id="info1" class="card-text">{{question.option_a}}</p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p id="info1"class="card-text">{{blue}}표</p>
+      </div>
+      <div class= 'd-flex justify-content-center my-2' style='width: 450px;'>
+        <p id="info1"class="card-text">{{avg}}%</p>
+      </div>
+    </div>
+    <div class="col-6 ">
+        <div class="card" style="border: solid red 3px; background-repeat: no-repeat; background-image: url({{question.img_b}}); background-size: cover; width:450px; height:300px;">
+          <div class="card-body">
+          </div>
+        </div>
+        <div class= 'd-flex justify-content-center my-2' style='width: 450px;'>
+          <input type="radio" name='pick' value="2" />
+        </div>
+        <div class= 'd-flex justify-content-center my-2' style='width: 450px;'>
+          <p id="info2" class="card-text">{{question.option_b}}</p>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p id="info2"class="card-text">{{red}}표</p>
+        </div>
+        <div class= 'd-flex justify-content-center my-2' style='width: 450px;'>
+          <p id="info2"class="card-text">{{avg2}}%</p>
+        </div>
+      </div>
+    </div>
+
+{%endblock%}
+
+{%block bo%}
+  
+    <div class='d-flex align-items-center'>
+      <input type="text" class="w-25 my-3 form-control mr-3" placeholder="Username 입력해주세요." name='username'>  
+      <input class='form-control w-25 d-none' type="date" value="2019-10-14" name='comment_date'>
+    </div>
+    <div class="input-group w-50">
+      <input type="text" class="form-control" placeholder="댓글을 입력하세요." name='comment'>
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">작성</button>
+      </div>
+    </div>
+  </form>
+
+  <ul class="list-group list-group-flush">
+    {%for choice in choices%}
+      <li class="list-group-item">
+        {% if choice.pick == 2 %}
+          <p><span class="badge badge-danger">{{choice.id}}</span> {{choice.username}}</p>
+        {%else%}
+          <p><span class="badge badge-primary">{{choice.id}}</span> {{choice.username}}</p>
+        {%endif%}
+
+        <form action="{% url 'questions:answer_update' question.id choice.id %}" method="post">
+          {% csrf_token %}
+          <input class="form-control w-50 d-inline" type="text" value="{{choice.comment}}" name="comment">
+          <input type="submit" class="btn btn-success" value="수정">
+          <a href="{% url 'questions:detail' question.id %}" class="btn btn-danger">취소</a>
+        </form>
+
+      </li>
+    {%endfor%}
+  </ul>
+  
+{%endblock%}

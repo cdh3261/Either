@@ -1,0 +1,31 @@
+{%extends 'base.html'%}
+{%block body%}
+
+  {% for question in questions %}
+  <div class="d-flex align-items-center mb-2">
+  <a href="{% url 'questions:detail' question.id %}"><h5 id='title' class="card-title mr-5">{{question.title}}</h5></a>
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <a href="{% url 'questions:update' question.id%}" class="card-link btn btn-outline-warning" name='options'>Edit</a>
+      <a href="{% url 'questions:delete' question.id %}" class="card-link btn btn-outline-warning" name='options'>Delete</a>
+  </div>
+</div>
+  
+  <form action="{% url 'questions:answer_create' question.id %}" method='POST'>
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-6 ">
+      <div class="card" style="border: solid blue 3px; background-repeat: no-repeat; background-image: url({{question.img_a}}); background-size: cover; width:450px; height:300px;">
+        <div class="card-body">
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card" style="border: solid red 3px; background-repeat: no-repeat; background-image: url({{question.img_b}}); background-size: cover; width:450px; height:300px;">
+        <div class="card-body">
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+  {%endfor%}
+{%endblock%}

@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+{%block body%}
+  <h4>FORM</h4>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Title</span>
+      </div>
+      <input type="text" class="form-control" value={{question.title}} name='title'>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Option-A</span>
+      </div>
+      <input type="text" class="form-control" value={{question.option_a}} name='option_a'>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Option-B</span>
+      </div>
+      <input type="text" class="form-control" value={{question.option_b}} name='option_b'>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Image-A</span>
+      </div>
+      <input type="text" class="form-control" value={{question.img_a}} name='img_a'>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Image-B</span>
+      </div>
+      <input type="text" class="form-control" value={{question.img_b}} name='img_b'>
+    </div>
+    <input type="submit" class="btn btn-outline-info">
+  </form>
+{%endblock%}

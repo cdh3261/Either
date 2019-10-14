@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+{%block body%}
+  <h4 id="title">질문등록</h4>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Title</span>
+      </div>
+      <input type="text" class="form-control" placeholder="제목을 입력해주세요." name='title'>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Option-A</span>
+      </div>
+      <input type="text" class="form-control" placeholder="선택지A를 입력해주세요." name='option_a'>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Option-B</span>
+      </div>
+      <input type="text" class="form-control" placeholder="선택지B를 입력해주세요." name='option_b'>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Image-A</span>
+      </div>
+      <input type="text" class="form-control" placeholder="이미지A URL을 입력해주세요." name='img_a'>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Image-B</span>
+      </div>
+      <input type="text" class="form-control" placeholder="이미지B URL을 입력해주세요." name='img_b'>
+    </div>
+    <input type="submit" class="btn btn-lg btn-info">
+  </form>
+{%endblock%}
